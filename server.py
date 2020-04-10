@@ -30,7 +30,7 @@ def handle_client(conn, addr):
             if msg == DISCONNECT_MESSAGE:
                 connected=False
             print(f"[{addr} {msg}]")
-            conn.send("MEssage received".encode(FORMAT)) #resending message to client
+            conn.send(f"MEssage received from {addr} by {SERVER}".encode(FORMAT)) #resending message to client
     conn.close()
 
 #start the socket server for us
@@ -46,7 +46,7 @@ def start():
         #when the new connection occurs
         #sotore its Object(conn) and address(IP and port)
         #conn is object, used for communication(socket obj)
-        conn, addr = server.accept()
+        conn, addr = server.accept()#server accepted a connection
         thread = threading.Thread(target=handle_client, args=(conn, addr))
         thread.start()
         #shows no of active connections except start thread
